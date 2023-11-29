@@ -14,11 +14,21 @@ public class DNAparser {
     }
 
     public boolean parse() throws IOException {
-        Scanner scanner = new Scanner(com);
-
-//****************** Your Codes Here ******************/
-
-
+        try (Scanner scanner = new Scanner(com)) {
+            while (scanner.hasNextLine()) {
+                //Each line contains a sequence ID with space
+                String[] line = scanner.nextLine().split(" ");
+                if (line.length == 2) {
+                    String sequenceID = line[0];
+                    String sequence = line[1];
+                    //insert sequence into the hashtable
+                    hashTable1.insert(sequenceID, sequence);
+                } else {
+                    System.out.println("Invalid line format: " + Arrays.toString(line));
+                    return false;
+                }
+            }
+        }
+        return true;
     }
-
 }

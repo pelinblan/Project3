@@ -3,7 +3,7 @@ public interface HashTable<T extends Comparable<T>, K> {
 
     }
 
-    public int insert(T id);
+    public int insert(T id, T sequenceID);
 
     public K remove(T sequenceID);
 
