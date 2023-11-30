@@ -4,9 +4,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class DNAparser {
-
-    private final File com;
-    private final HashFunction hashTable1;
+    private File com;
+    private HashFunction hashTable1;
 
     public DNAparser(File c, int size) throws IOException {
         com = c;
@@ -19,8 +18,8 @@ public class DNAparser {
                 //Each line contains a sequence ID with space
                 String[] line = scanner.nextLine().split(" ");
                 if (line.length == 2) {
-                    String sequenceID = line[0].trim();
-                    String sequence = line[1].trim();
+                    String sequenceID = line[1].trim();
+                    String sequence = line[2].trim();
                     //insert sequence into the hashtable
                     hashTable1.insert(sequenceID, sequence);
                 } else {

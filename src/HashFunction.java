@@ -31,7 +31,7 @@ public class HashFunction implements HashTable<String, HashObject> {
 
             if (hashes[index] == null) {
                 hashes[index] = hashObject;
-                return index; // successful, return the index
+                return index;  // successful, return the index
             }
         }
 

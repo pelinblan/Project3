@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class DNAdbase {
-
     private static int hashSize;
     private static File command;
     private static DNAparser parse;
@@ -18,7 +17,7 @@ public class DNAdbase {
             System.out.println("Please input a correctly formatted command");
         }
     }
-    
+
     public DNAparser getParser() {
         return parse;
     }
