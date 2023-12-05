@@ -6,11 +6,10 @@ public class DNAparser {
     private File com;
     private HashFunction hashTable1;
 
-    public DNAparser(File c, int size) throws IOException {
+    public DNAparser(File c, int size) {
         com = c;
         this.hashTable1 = new HashFunction(size);
     }
-
     public void parse() throws IOException {
         try (Scanner scanner = new Scanner(com)) {
             while (scanner.hasNextLine()) {
@@ -19,7 +18,7 @@ public class DNAparser {
                     continue;
                 }
                 //Each line contains a sequence ID with space
-                String[] line = nextLine.split(" ");
+                String[] line = nextLine.split("\\s+");
                 //if(line[0].equals("")){
                 //  continue;
                 // }
@@ -35,13 +34,13 @@ public class DNAparser {
                         //print hashtable
                         hashTable1.print();
 
-                    } else if (line[0].equals("search") && line.length >= 3) {
-                        String sequenceID = line[2];
+                    } else if (line[0].equals("search") && line.length == 2) {
+                        String sequenceID = line[1];
                         //search sequence into the hashtable
                         hashTable1.search(sequenceID);
 
-                    } else if (line[0].equals("remove") && line.length >= 3) {
-                        String sequenceID = line[2];
+                    } else if (line[0].equals("remove") && line.length == 2) {
+                        String sequenceID = line[1];
                         //remove sequence in the hashtable
                         hashTable1.remove(sequenceID);
                     } else {

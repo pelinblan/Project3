@@ -53,7 +53,7 @@ public class HashFunction implements HashTable<String, HashObject> {
             hashValue = (hashValue + 1) % hashes.length; // Linear probing pos = (home + p(k, i)) % M
         }
         //not found
-        System.out.println("Error: Sequence not found.");
+        System.out.println("Remove not found");
         return null;
     }
     // returns an array of non-null HashObjects in the hash table
@@ -88,6 +88,7 @@ public class HashFunction implements HashTable<String, HashObject> {
             hashValue = (hashValue + 1) % hashes.length; // Linear probing
         }
         // object not found
+        System.out.println("Search not found");
         return null;
     }
 }
