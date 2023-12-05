@@ -9,7 +9,6 @@ public class HashObject {
         this.id = id; //initialize id
         this.seq = seq; //initialize seq
     }
-
     // Get the ID from the HashObject
     public String getId() {
         return id;
@@ -21,5 +20,4 @@ public class HashObject {
     }
 
     // You can add other functions if needed
-
 }

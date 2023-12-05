@@ -11,23 +11,44 @@ public class DNAparser {
         com = c;
         this.hashTable1 = new HashFunction(size);
     }
-
-    public boolean parse() throws IOException {
+    public void parse() throws IOException {
         try (Scanner scanner = new Scanner(com)) {
             while (scanner.hasNextLine()) {
+                String nextLine = scanner.nextLine().trim();
+                if(nextLine.equals("")){
+                    continue;
+                }
                 //Each line contains a sequence ID with space
-                String[] line = scanner.nextLine().split(" ");
-                if (line.length == 2) {
-                    String sequenceID = line[1].trim();
-                    String sequence = line[2].trim();
+                String[] line = nextLine.split(" ");
+                //if(line[0].equals("")){
+                  //  continue;
+               // }
+//                System.out.println(line[0]);
+            if (line.length >= 3) {
+                if (line[0].equals("insert")) {
+                    String sequenceID = line[2];
+                    String sequence = scanner.nextLine();
                     //insert sequence into the hashtable
                     hashTable1.insert(sequenceID, sequence);
+
+                } else if (line[0].equals("print")) {
+                    //print hashtable
+                    hashTable1.print();
+
+                }else if (line[0].equals("search")) {
+                    String sequenceID = line[2];
+                    //search sequence into the hashtable
+                    hashTable1.search(sequenceID);
+
+                } else if (line[0].equals("remove")) {
+                    String sequenceID = line[2];
+                    //remove sequence in the hashtable
+                    hashTable1.remove(sequenceID);
                 } else {
                     System.out.println("Invalid line format: " + Arrays.toString(line));
-                    return false;
                 }
             }
+            else{
         }
-        return true;
     }
 }

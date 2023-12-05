@@ -1,5 +1,5 @@
 public class HashFunction implements HashTable<String, HashObject> {
-    private HashObject[] hashes;
+    private final HashObject[] hashes;
 
     // Constructor
     public HashFunction(int hashSize) {
@@ -39,7 +39,6 @@ public class HashFunction implements HashTable<String, HashObject> {
         System.out.println("Error: Unable to insert, table is full.");
         return -1;
     }
-
     //removes a HashObject from the hash table
     public HashObject remove(String id) {
         int hashValue = hash(id);
@@ -53,12 +52,10 @@ public class HashFunction implements HashTable<String, HashObject> {
 
             hashValue = (hashValue + 1) % hashes.length; // Linear probing pos = (home + p(k, i)) % M
         }
-
         //not found
         System.out.println("Error: Sequence not found.");
         return null;
     }
-
     // returns an array of non-null HashObjects in the hash table
     public HashObject[] print() {
         int notNull = 0;
