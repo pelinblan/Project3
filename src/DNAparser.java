@@ -2,7 +2,6 @@ import  java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
-
 public class DNAparser {
     private File com;
     private HashFunction hashTable1;
@@ -11,44 +10,47 @@ public class DNAparser {
         com = c;
         this.hashTable1 = new HashFunction(size);
     }
+
     public void parse() throws IOException {
         try (Scanner scanner = new Scanner(com)) {
             while (scanner.hasNextLine()) {
                 String nextLine = scanner.nextLine().trim();
-                if(nextLine.equals("")){
+                if (nextLine.equals("")) {
                     continue;
                 }
                 //Each line contains a sequence ID with space
                 String[] line = nextLine.split(" ");
                 //if(line[0].equals("")){
-                  //  continue;
-               // }
+                //  continue;
+                // }
 //                System.out.println(line[0]);
-            if (line.length >= 3) {
-                if (line[0].equals("insert")) {
-                    String sequenceID = line[2];
-                    String sequence = scanner.nextLine();
-                    //insert sequence into the hashtable
-                    hashTable1.insert(sequenceID, sequence);
+                if (line.length >= 1) {
+                    if (line[0].equals("insert")) {
+                        String sequenceID = line[2];
+                        String sequence = scanner.nextLine();
+                        //insert sequence into the hashtable
+                        hashTable1.insert(sequenceID, sequence);
 
-                } else if (line[0].equals("print")) {
-                    //print hashtable
-                    hashTable1.print();
+                    } else if (line[0].equals("print")) {
+                        //print hashtable
+                        hashTable1.print();
 
-                }else if (line[0].equals("search")) {
-                    String sequenceID = line[2];
-                    //search sequence into the hashtable
-                    hashTable1.search(sequenceID);
+                    } else if (line[0].equals("search") && line.length >= 3) {
+                        String sequenceID = line[2];
+                        //search sequence into the hashtable
+                        hashTable1.search(sequenceID);
 
-                } else if (line[0].equals("remove")) {
-                    String sequenceID = line[2];
-                    //remove sequence in the hashtable
-                    hashTable1.remove(sequenceID);
+                    } else if (line[0].equals("remove") && line.length >= 3) {
+                        String sequenceID = line[2];
+                        //remove sequence in the hashtable
+                        hashTable1.remove(sequenceID);
+                    } else {
+                        System.out.println("Invalid line format: " + Arrays.toString(line));
+                    }
                 } else {
                     System.out.println("Invalid line format: " + Arrays.toString(line));
                 }
             }
-            else{
         }
     }
 }
