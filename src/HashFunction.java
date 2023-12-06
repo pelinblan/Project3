@@ -31,31 +31,35 @@ public class HashFunction implements HashTable<String, HashObject> {
 
             if (hashes[index] == null) {
                 hashes[index] = hashObject;
+                System.out.println("Object inserted at index " + index + ": " + hashObject);
                 return index;  // successful, return the index
             }
         }
-
         //can't insert
         System.out.println("Error: Unable to insert, table is full.");
         return -1;
     }
+
     //removes a HashObject from the hash table
     public HashObject remove(String id) {
         int hashValue = hash(id);
 
         for (int i = 0; i < hashes.length; i++) {
-            if (hashes[hashValue] != null && hashes[hashValue].getId().equals(id)) {
-                HashObject removedObject = hashes[hashValue];
-                hashes[hashValue] = null;
+            int index = (hashValue + i) % hashes.length;
+
+            if (hashes[index] != null && hashes[index].getId().equals(id)) {
+                HashObject removedObject = hashes[index];
+                hashes[index] = null;
+                System.out.println("Object removed at index " + index + ": " + removedObject);
                 return removedObject; // found and removed
             }
-
-            hashValue = (hashValue + 1) % hashes.length; // Linear probing pos = (home + p(k, i)) % M
         }
-        //not found
-        System.out.println("Remove not found");
+
+        // not found
+        System.out.println("Remove not found for ID: " + id);
         return null;
     }
+
     // returns an array of non-null HashObjects in the hash table
     public HashObject[] print() {
         int notNull = 0;
@@ -76,19 +80,24 @@ public class HashFunction implements HashTable<String, HashObject> {
         }
         return result;
     }
+
     //searches for a HashObject in the hash table
     public HashObject search(String id) {
         int hashValue = hash(id);
 
         for (int i = 0; i < hashes.length; i++) {
-            if (hashes[hashValue] != null && hashes[hashValue].getId().equals(id)) {
-                return hashes[hashValue]; // found the object
-            }
+            int index = (hashValue + i) % hashes.length;
 
-            hashValue = (hashValue + 1) % hashes.length; // Linear probing
+            if (hashes[index] != null && hashes[index].getId().equals(id)) {
+                System.out.println("Object found at index " + index + ": " + hashes[index]);
+                return hashes[index]; // found the object
+            }
         }
+
         // object not found
-        System.out.println("Search not found");
+        System.out.println("Search not found for ID: " + id);
         return null;
     }
 }
+
+
